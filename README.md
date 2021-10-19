@@ -58,6 +58,8 @@ GITLAB_TOKEN=${3-"xxxxxxxxxxxxxxxxxxxxxxxx"}
 
 2.  运行脚本
 
+GitBackup.sh脚本所在目录位置即为工作目录，会在当下目录生成仓库组目录结构。
+
 `./GitBackup.sh 组路径`
 
 
