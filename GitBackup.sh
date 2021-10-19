@@ -26,9 +26,18 @@ GITAUTHURL=${GITBASEURL/\/\//\/\/oauth2:${GITLAB_TOKEN}@}
 ## gitlab的组api
 APIURL="api/v4/groups"
 
+
+
+## 当前目录为工作目录
+WORKDIR=$(cd "$(dirname "$0")" && pwd)
+
 _datetime=$(date "+%F %r")
-GITLOG="backup_log_$(date "+%F").log"
+
+## 日志文件
+GITLOG="${WORKDIR}/backup_log_$(date "+%F").log"
 [ ! -f "${GITLOG}" ] && touch ${GITLOG}
+
+
 #
 # Set Colors
 #
@@ -79,8 +88,6 @@ type git >/dev/null 2>&1 || { error >&2 "git命令没有安装，无法继续并
 ## 判断是否有自签名证书CA或证书是否可用
 
 
-## 当前目录为工作目录
-WORKDIR=$(cd "$(dirname "$0")" && pwd)
 
 ## 生成临时目录
 TMPDIR="$(mktemp -d -p ${WORKDIR})"
@@ -163,7 +170,7 @@ function git_fetch(){
 
 ## 清理临时目录
 function clean_tempdir(){
-    rm -rf ${TMPDIR} > /dev/null 2>&1
+    rm -rf ${WORKDIR}/tmp.* > /dev/null 2>&1
     info "清理临时目录"
 }
 
